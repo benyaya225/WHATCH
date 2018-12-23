@@ -1,13 +1,13 @@
-package com.whatch.userManagement;
+package com.user.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserManagementApplication {
+public class UserApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserManagementApplication.class, args);
+		SpringApplication.run(UserApplication.class, args);
 	}
 
 }

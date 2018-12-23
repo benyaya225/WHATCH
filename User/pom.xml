@@ -8,10 +8,10 @@
 		<version>2.1.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.whatch</groupId>
-	<artifactId>userManagement</artifactId>
+	<groupId>com.user</groupId>
+	<artifactId>user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>userManagement</name>
+	<name>user</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
