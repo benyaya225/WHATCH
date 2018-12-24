@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CommentDaoImpl implements CommentDao {
 
     public static List<Comment> comments = new ArrayList<>();
@@ -14,12 +15,11 @@ public class CommentDaoImpl implements CommentDao {
         comments.add(new Comment(2, "bdao", 4, "Good movie."));
     }
     @Override
-    public List<Comment> findByMovieId(int movieId){
+    public List<Comment> findMovieComments(int movieId){
         List<Comment> result = new ArrayList<>();
         for (Comment comment : comments){
             if(comment.getMovieId() == movieId){
                 result.add(comment);
-                return result;
             }
         }
         return result;
