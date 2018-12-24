@@ -14,9 +14,14 @@ public class CommentController {
     @Autowired
     private CommentDao commentDao;
 
-    @GetMapping(value = "/Comments/{movieId}")
+    @GetMapping(value = "/Comments/MovieId={movieId}")
     public List<Comment> displayMovieComments(@PathVariable int movieId){
        return commentDao.findMovieComments(movieId);
+    }
+
+    @PostMapping(value = "/Comments")
+    public void addAComment(@RequestBody Comment comment){
+        commentDao.save(comment);
     }
 
 }
