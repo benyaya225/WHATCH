@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
+import org.springframework.data.annotation.Transient;
 
 
 @Data
@@ -19,12 +21,24 @@ public class User {
     private int id;
     @Column(name = "email")
     private String email;
+    @Transient
     @Column(name = "password")
     private String password;
     @Column(name = "name")
     private String name;
     @Column(name = "last_name")
     private String lastName;
+    @javax.persistence.Transient
+    private List<Integer> favMovies;
+
+
+    public List<Integer> getFavMovies() {
+        return favMovies;
+    }
+
+    public void setFavMovies(List<Integer> favMovies) {
+        this.favMovies = favMovies;
+    }
 
     public int getId() {
         return id;

@@ -1,6 +1,8 @@
 package com.user.user.contoller;
 
+import com.user.user.model.Movie;
 import com.user.user.model.User;
+import com.user.user.repository.MovieRepository;
 import com.user.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,6 +51,14 @@ public class LoginControler {
 
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable int id ){
-        return userRepository.findById(id);
+        User user = new User();
+        user = userRepository.findById(id);
+        user.setFavMovies(userRepository.getBestMovies(id));
+        return user;
+    }
+
+    @GetMapping("/user/{id}/fav")
+    public List<Integer> getFav(@PathVariable int id){
+        return userRepository.getBestMovies(id);
     }
 }
