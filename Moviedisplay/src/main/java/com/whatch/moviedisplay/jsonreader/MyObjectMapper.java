@@ -17,6 +17,4 @@ public class MyObjectMapper {
         logger.info(movie.toString());
         return movie;
     }
-
-
 }
