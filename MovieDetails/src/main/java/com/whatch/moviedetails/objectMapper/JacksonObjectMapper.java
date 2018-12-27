@@ -27,11 +27,11 @@ public class JacksonObjectMapper {
 
         JsonNode rootNode = objectMapper.readTree(jsonData);
 
-        Iterator<JsonNode> elements = rootNode.elements();
+        Iterator<JsonNode> rootElements = rootNode.elements();
 
-        while (elements.hasNext()) {
+        while (rootElements.hasNext()) {
 
-            JsonNode movieNode = elements.next();
+            JsonNode movieNode = rootElements.next();
 
             JsonNode titleNode = movieNode.path("title");
 
@@ -39,9 +39,35 @@ public class JacksonObjectMapper {
 
             JsonNode yearNode = movieNode.path("year");
 
+            JsonNode ratingNode = movieNode.path("rating");
+
+            JsonNode directorsNode = movieNode.path("directors");
+
+            List<String> directorsList = new ArrayList<String>();
+
+            Iterator<JsonNode> directorsElements = directorsNode.elements();
+            while(directorsElements.hasNext()){
+                JsonNode director = directorsElements.next();
+                directorsList.add(director.asText());
+            }
+
+            JsonNode genresNode = movieNode.path("genres");
+
+            /*
+            List<String> genresList = new ArrayList<String>();
+
+            Iterator<JsonNode> genresElements = genresNode.elements();
+            while(genresElements.hasNext()){
+                JsonNode genre = genresElements.next();
+                genresList.add(genre.asText());
+            }
+            */
+
             JsonNode imageNode = movieNode.path("image");
 
-            detailsList.add(new Details(titleNode.asText(), plotNode.asText(), yearNode.asInt(), imageNode.asText()));
+            JsonNode runningTimeSecsNode = movieNode.path("running_time_secs");
+
+            detailsList.add(new Details(titleNode.asText(), plotNode.asText(), yearNode.asInt(), ratingNode.asDouble(), directorsNode.asText(), genresNode.asText(), imageNode.asText(), runningTimeSecsNode.asInt()));
         }
 
         return detailsList;
