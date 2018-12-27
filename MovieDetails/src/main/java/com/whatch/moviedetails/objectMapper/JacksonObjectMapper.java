@@ -2,17 +2,26 @@ package com.whatch.moviedetails.objectMapper;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whatch.moviedetails.model.Details;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class JacksonObjectMapper {
     public static void main(String[] args) throws IOException {
+        getAllMovies();
+    }
 
-        byte[] jsonData = Files.readAllBytes(Paths.get("src/main/resources/jsonFiles/moviesTest.json"));
+    public static List<Details> getAllMovies() throws IOException {
+
+        List<Details> detailsList = new ArrayList<Details>();
+
+        byte[] jsonData = Files.readAllBytes(Paths.get("src/main/resources/jsonFiles/moviesDetail.json"));
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -20,27 +29,21 @@ public class JacksonObjectMapper {
 
         Iterator<JsonNode> elements = rootNode.elements();
 
-        while(elements.hasNext()) {
+        while (elements.hasNext()) {
 
             JsonNode movieNode = elements.next();
 
-            JsonNode actorsNode = movieNode.path("actors");
-            System.out.println("actors = " + actorsNode);
+            JsonNode titleNode = movieNode.path("title");
 
-            JsonNode releaseDateNode = movieNode.path("release_date");
-            System.out.println("releaseDate = " + releaseDateNode);
+            JsonNode plotNode = movieNode.path("plot");
 
-            JsonNode directorsNode = movieNode.path("directors");
-            System.out.println("directors = " + directorsNode);
+            JsonNode yearNode = movieNode.path("year");
 
-            JsonNode genreNode = movieNode.path("genre");
-            System.out.println("genre = " + genreNode);
+            JsonNode imageNode = movieNode.path("image");
 
-            JsonNode pressRatingNode = movieNode.path("press_rating");
-            System.out.println("pressRating = " + pressRatingNode);
-
-            JsonNode movieTitleNode = movieNode.path("movie_title");
-            System.out.println("movieTitle = " + movieTitleNode);
+            detailsList.add(new Details(titleNode.asText(), plotNode.asText(), yearNode.asInt(), imageNode.asText()));
         }
+
+        return detailsList;
     }
 }
