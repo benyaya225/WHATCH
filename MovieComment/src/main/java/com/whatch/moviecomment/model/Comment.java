@@ -28,10 +28,6 @@ public class Comment {
     @Column(name = "content")
     private String content;
 
-    //Default constructor
-    public Comment() {
-    }
-
 
     public Comment(int movieId, String username, int userRate, String content) {
         this.movieId = movieId;

@@ -1,6 +1,5 @@
 package com.whatch.moviecomment.web.controller;
 import com.whatch.moviecomment.model.Comment;
-import com.whatch.moviecomment.dao.CommentDao;
 import com.whatch.moviecomment.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +17,11 @@ public class CommentController {
     @Autowired
     private CommentRepository commentRepository;
 
+    /*@GetMapping(value = "/Comments/MovieId={movieId}")
+    public String getWorks(@PathVariable int movieId){
+        return "Get working" + movieId ;
+    }*/
+
     @GetMapping(value = "/Comments/MovieId={movieId}")
     public List<Comment> displayMovieComments(@PathVariable int movieId){
        return commentRepository.findByMovieId(movieId);
@@ -27,5 +31,4 @@ public class CommentController {
     public Comment addAComment(@RequestBody Comment comment){
        return commentRepository.save(comment);
     }
-
 }
