@@ -5,12 +5,13 @@ import com.whatch.moviedetails.objectMapper.JacksonObjectMapper;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class DetailsDaoImpl implements DetailsDao{
 
-    List<Details> detailsList;
+    List<Details> detailsList = new ArrayList<Details>();
 
     @Override
     public List<Details> findAll() {
@@ -23,18 +24,19 @@ public class DetailsDaoImpl implements DetailsDao{
     }
 
     @Override
-    public Details findByTitle(String title) {
+    public List<Details> findByTitle(String title) {
+        List<Details> detailsListByTitle = new ArrayList<Details>();
         try {
             detailsList = JacksonObjectMapper.getAllMovies();
         } catch(IOException ie) {
             ie.printStackTrace();
         }
         for (Details details : detailsList) {
-            if(details.getTitle().equals(title)){
-                return details;
+            if(details.getTitle().toLowerCase().contains(title.toLowerCase())){
+                detailsListByTitle.add(details);
             }
         }
-        return null;
+        return detailsListByTitle;
     }
 
     @Override

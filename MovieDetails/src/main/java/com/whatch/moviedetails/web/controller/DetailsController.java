@@ -19,7 +19,7 @@ public class DetailsController {
 
 
     @GetMapping(value="/MoviesDetails/MovieTitle={title}")
-    public Details displayMovieDetailsByTitle(@PathVariable String title) {
+    public List<Details> displayMovieDetailsByTitle(@PathVariable String title) {
         return detailsDao.findByTitle(title);
     }
 
