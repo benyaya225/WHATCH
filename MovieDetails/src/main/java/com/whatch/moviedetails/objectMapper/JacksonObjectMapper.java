@@ -53,7 +53,6 @@ public class JacksonObjectMapper {
 
             JsonNode genresNode = movieNode.path("genres");
 
-            /*
             List<String> genresList = new ArrayList<String>();
 
             Iterator<JsonNode> genresElements = genresNode.elements();
@@ -61,13 +60,13 @@ public class JacksonObjectMapper {
                 JsonNode genre = genresElements.next();
                 genresList.add(genre.asText());
             }
-            */
+
 
             JsonNode imageNode = movieNode.path("image");
 
             JsonNode runningTimeSecsNode = movieNode.path("running_time_secs");
 
-            detailsList.add(new Details(titleNode.asText(), plotNode.asText(), yearNode.asInt(), ratingNode.asDouble(), directorsNode.asText(), genresNode.asText(), imageNode.asText(), runningTimeSecsNode.asInt()));
+            detailsList.add(new Details(titleNode.asText(), plotNode.asText(), yearNode.asInt(), ratingNode.asDouble(), directorsList, genresList, imageNode.asText(), runningTimeSecsNode.asInt()));
         }
 
         return detailsList;

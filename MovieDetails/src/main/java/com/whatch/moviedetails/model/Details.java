@@ -1,16 +1,18 @@
 package com.whatch.moviedetails.model;
 
+import java.util.List;
+
 public class Details {
     private String title;
     private String plot;
     private int year;
     private double rating;
-    private String directors;
-    private String genres;
+    private List<String> directors;
+    private List<String> genres;
     private String image;
     private int runningTimeSecs;
 
-    public Details(String title, String plot, int year, double rating, String directors, String genres, String image, int runningTimeSecs) {
+    public Details(String title, String plot, int year, double rating, List<String> directors, List<String> genres, String image, int runningTimeSecs) {
         this.title = title;
         this.plot = plot;
         this.year = year;
@@ -37,11 +39,11 @@ public class Details {
         return rating;
     }
 
-    public String getDirectors() {
+    public List<String> getDirectors() {
         return directors;
     }
 
-    public String getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
