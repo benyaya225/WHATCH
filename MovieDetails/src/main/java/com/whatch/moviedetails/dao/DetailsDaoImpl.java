@@ -7,11 +7,58 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 @Repository
 public class DetailsDaoImpl implements DetailsDao{
 
     List<Details> detailsList = new ArrayList<Details>();
+
+    private boolean isSameTitle(String movieTitle, String searchTitle) {
+        if(movieTitle.contains(searchTitle)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private boolean isSameYear(int movieYear, int searchYear) {
+        if(movieYear == searchYear){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private boolean isSameDirector(List<String> movieDirectors, String searchDirector) {
+        boolean gotSameDirector = false;
+        ListIterator<String> directorsIterator = movieDirectors.listIterator();
+        while(directorsIterator.hasNext()){
+            String director = directorsIterator.next().toLowerCase();
+            if(director.contains(searchDirector)){
+                gotSameDirector = true;
+            }
+        }
+        if(gotSameDirector == true) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /*
+    private boolean isSameGenre(List<String> movieGenres, String searchGenre) {
+        if(movieTitle.contains(searchTitle)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    */
 
     @Override
     public List<Details> findAll() {
@@ -32,7 +79,9 @@ public class DetailsDaoImpl implements DetailsDao{
             ie.printStackTrace();
         }
         for (Details details : detailsList) {
-            if(details.getTitle().toLowerCase().contains(title.toLowerCase())){
+            String movieTitle = details.getTitle().toLowerCase();
+            String searchTitle = title.toLowerCase();
+            if(isSameTitle(movieTitle, searchTitle)){
                 detailsListByTitle.add(details);
             }
         }
@@ -40,18 +89,21 @@ public class DetailsDaoImpl implements DetailsDao{
     }
 
     @Override
-    public Details findByDirector(String director) {
+    public List<Details> findByDirector(String director) {
+        List<Details> detailsListByDirector = new ArrayList<Details>();
         try {
             detailsList = JacksonObjectMapper.getAllMovies();
         } catch(IOException ie) {
             ie.printStackTrace();
         }
         for (Details details : detailsList) {
-            if(details.getDirectors().equals(director)){
-                return details;
+            List<String> movieDirectors = details.getDirectors();
+            String searchDirector = director.toLowerCase();
+            if(isSameDirector(movieDirectors, searchDirector)){
+                detailsListByDirector.add(details);
             }
         }
-        return null;
+        return detailsListByDirector;
     }
 
     @Override

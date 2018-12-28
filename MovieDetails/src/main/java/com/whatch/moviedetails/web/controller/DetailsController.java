@@ -23,12 +23,10 @@ public class DetailsController {
         return detailsDao.findByTitle(title);
     }
 
-    /*
-    @GetMapping(value="/MoviesDetails/MovieTitle={title}/MovieYear={year}")
-    public Details displayMovieDetailsByDirector(@PathVariable String director) {
+    @GetMapping(value="/MoviesDetails/MovieDirector={director}")
+    public List<Details> displayMovieDetailsByDirector(@PathVariable String director) {
         return detailsDao.findByDirector(director);
     }
-    */
 
     @GetMapping(value="/MoviesDetails/MovieYear={year}")
     public Details displayMovieDetailsByYear(@PathVariable int year) {

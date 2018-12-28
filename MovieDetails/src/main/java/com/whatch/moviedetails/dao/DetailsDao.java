@@ -7,7 +7,7 @@ import java.util.List;
 public interface DetailsDao {
     public List<Details> findAll();
     public List<Details> findByTitle(String title);
-    public Details findByDirector(String director);
+    public List<Details> findByDirector(String director);
     public Details findByYear(int year);
     public Details findGenre(String genre);
     public Details findByTitleAndDirector(String title, String director);
